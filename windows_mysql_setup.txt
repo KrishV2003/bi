@@ -1,0 +1,67 @@
+1) MySQL Installer for Windows
+2) Choose: mysql-installer-community 
+3) Select:
+   Developer Default
+4) Install Required Components: 
+   Sometimes installer says:
+
+   Missing Visual C++ Redistributable
+
+   Click:
+
+   Execute
+   Install missing software
+
+   Then continue.
+5) Install Products: Click execute
+6) Configure MySQL Server:
+   -- Config Type: Choose -> Development Computer
+   -- Connectivity: Port = 3306
+   -- Authentication Method: Choose -> Use Strong Password Encryption
+   -- Create Root Password: Create password for -> root user -> eg: Root@123
+   -- Windows Service: Configure as Windows Service -> Start MySQL Server automatically
+7) Apply Configuration: Click -> Execute then Click -> Finish
+8) Open MySQL Workbench -> click Local instance MySQL80 -> Enter Password you created -> Now connected successfully. -> SHOW DATABASES;
+9) On terminal: mysql -u root -p
+10) Errors:
+    -- mysql command not recognized:
+       Use full path: "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p OR add MySQL bin folder to PATH.
+    -- Can't connect to server:
+       Open: services.msc
+
+---------------------------------------------------------
+
+How to change the previous password by not knowing the previous one:
+1) CLOSE MYSQL WORKBENCH
+2) OPEN CMD AS ADMINISTRATOR
+3) STOP MYSQL SERVICE: Run: net stop mysql80 and Do NOT close this CMD window.
+4) OPEN SECOND ADMIN CMD WINDOW:
+   -- GO TO MYSQL BIN FOLDER:
+      cd "C:\Program Files\MySQL\MySQL Server 8.0\bin" 
+   -- START MYSQL WITHOUT PASSWORD CHECK:
+      mysqld --skip-grant-tables
+5) OPEN THIRD NORMAL CMD WINDOW:
+   -- Run: mysql -u root
+   -- RESET PASSWORD: 
+      Run: FLUSH PRIVILEGES;
+      Then: ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword@123';
+      Then Run: exit
+6) CLOSE ALL CMD WINDOWS
+7) START MYSQL NORMALLY:
+   -- Open CMD as administrator and run: net start mysql80
+   -- TEST NEW PASSWORD:
+      mysql -u root -p
+      You will see: mysql>
+8) HOW TO UPDATE PASSWORD IN WORKBENCH
+Open Workbench.
+Go to:
+Database → Manage Connections
+Select your connection.
+Click:
+Store in Vault
+OR:
+Clear Password
+Then reconnect.
+Workbench will ask for new password.
+Enter new password.
+

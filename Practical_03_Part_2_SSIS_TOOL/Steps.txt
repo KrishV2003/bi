@@ -1,0 +1,94 @@
+Software steps:
+
+1) MYSQL Install
+2) Excel install
+3) Download Visual Studio installer 
+4) Download Visual Studio
+5) Select the workloads in visual studio installer:
+   -- ASP.net
+   -- Python dev
+   -- .NET desktop dev
+   -- Data storage and preprocessing
+6) Select the individual components:
+   -- Microsoft analysis
+   -- Microsoft BI shared components
+   -- SQL server integration
+7) In data storage and preprocessing select:
+   -- SQL server data tools
+   -- Azure data lake
+   -- .NET framework 4.7.2 dev tools
+8) Then click on install while downloading
+9) Add on extensions in visual studio application:
+   -- Go to extensions and then go to manage extensions:
+      --> SQL server integration services project 2022
+      --> Microsoft analysis services project 2022
+----------------------------------------------------------------
+Practical steps:
+
+1) Have product.xlsx file
+2) Transform: 
+   -- Product name change into uppercase
+   -- Formula for stock value is : unitprice * unitinstock
+   -- Load in sql server database name is "bipractical" and table name is "Product"
+3) SQL script:
+   CREATE DATABASE bi_practical_02;
+USE bi_practical_02;
+
+CREATE TABLE Product(
+	Product_id FLOAT,
+    Product_name VARCHAR(100),
+    Category_id FLOAT,
+    Stock_value FLOAT
+);
+
+SELECT * FROM Product;
+4) Open Visual Studio and create new project
+5) Select template Integration Services Project
+6) Then click on create
+7) Double Click on data flow task
+8) Go to data flow tab
+9) Select the source from the Other Sources: 
+   Excel Source 
+   and double click on it
+10) And then setup the new connection and browse the excel path of product.xlsx and then 
+    also select the excel version and then click on ok and select the excel sheet as Sheet1$ and 
+    then preview and then close and then click ok
+11) Select the ODBC Destination as MySQL DB
+    -- Install MySQL Connector/ODBC 8.x 64-bit (Windows (x86, 64-bit), MSI Installer)
+    -- Choose: Typical
+    -- Open Windows Search → type: ODBC Data Sources (64-bit) Open it.
+    -- System DSN tab and then click add
+    -- Select: MySQL ODBC 9.7 Unicode Driver
+    -- Fill
+           Field	         Value
+           Data Source Name	 MyMySQL
+           Server	         localhost
+           Port	                 3306
+           User	                 root (or your MySQL username)
+           Password	         your password
+           Database	         your database name
+    -- Click Test and then go to ssis and click refresh and choose MyMySQL
+    -- Then enter username and password of MySQL
+    -- Then test connection and click ok
+12) Transformation:
+    -- Go to Common and select Derived column and then connect the excel source arrow to derived column
+    -- Then connect the derived column arrow to the ODBC Destination
+    -- Then give expression -> go to string function and select UPPER() and bring in expression
+       by dragging it and Give chr exp as UPPER(ProductName)
+    -- Under Derived column select Replace'ProductName' and Derived Column Name is ProductName
+    -- Then next give Derived Column Name as stockvalue
+    -- Derived column select add as new column option
+    -- Expression: [UnitInStock] * [UnitPrice]
+    -- Click Ok
+13) Go to ODBC Destination
+    -- Select the database name
+    -- Data access mode: Table name - row by row
+    -- Select the table name as Product
+    -- Go to Mapping:
+       ProductId -> Product_id
+       ProductName -> Product_name
+       CategoryId -> Category_id
+       stockvalue -> Stock_value
+    -- Click on Ok
+14) Click on Start
+15) Start Visual Studio as Administrator

@@ -1,0 +1,82 @@
+MYSQL SERVER:
+1) Open Terminal:
+2) sudo apt update
+3) Install MySQL Server: sudo apt install mysql-server -y
+4) Check MySQL Status: sudo systemctl status MySQL
+5) Secure Installation: 
+   -- sudo mysql_secure_installation
+   -- VALIDATE PASSWORD COMPONENT?: Y
+   -- Password Strength Level: 1
+   -- Enter Root Password: Root@123
+   -- Remove Anonymous Users?: Y
+   -- Disallow Root Login Remotely?: Y
+   -- Remove Test Database?: Y
+   -- Reload Privilege Tables?: Y
+6) Login to MYSQL: 
+   -- sudo MySQL OR mysql -u root -p
+   -- Enter password
+7) Start
+   -- sudo systemctl start mysql
+   Stop
+   -- sudo systemctl stop mysql
+   Restart
+   -- sudo systemctl restart mysql 
+
+------------------------------------------------
+
+MYSQL WORKBENCH:
+1) Go to https://dev.mysql.com/downloads/workbench/
+2) Download mysql-workbench-community_8.0.47-1ubuntu22.04_amd64.deb
+3) Open terminal in Downloads folder
+4) cd Downloads
+5) ls
+6) sudo dpkg -i mysql-workbench-community_8.0.47-1ubuntu22.04_amd64.deb
+7) FIX DEPENDENCIES: sudo apt --fix-broken install -y then again run: sudo dpkg -i mysql-workbench-community_8.0.47-1ubuntu22.04_amd64.deb
+8) FIX ROOT LOGIN FOR MYSQL WORKBENCH:
+   -- OPEN TERMINAL:
+   sudo MySQL
+   -- Run: SELECT user,host,plugin FROM mysql.user;
+   -- CHANGE ROOT AUTHENTICATION: 
+      Run: ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Root@123';
+   -- RELOAD PRIVILEGES:
+      Run: FLUSH PRIVILEGES;
+   -- exit
+   -- RESTART MYSQL SERVICE
+      Run: sudo systemctl restart MySQL
+   -- TEST LOGIN FROM TERMINAL: 
+      Run: mysql -u root -p and then enter password
+   -- Connect Workbench:
+      In connection settings:
+      -- Test Connection
+
+------------------------------------------------
+
+How to change the previous password by not knowing the previous one:
+1) OPEN TERMINAL:
+   -- Run: sudo systemctl stop MySQL
+2) STOP MYSQL SERVICE:
+   -- Run: sudo systemctl stop MySQL
+      Enter Ubuntu password.
+3) START MYSQL WITHOUT PASSWORD CHECKING:
+   -- Run: sudo mysqld_safe --skip-grant-tables &   (Keep terminal open)
+4) OPEN NEW TERMINAL (Ctrl + Alt + T):
+   -- Run: mysql -u root
+   -- Run: FLUSH PRIVILEGES;
+   -- Run: ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword@123'; 
+           ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Krishna@123';
+   -- Run: exit
+   -- STOP SAFE MODE MYSQL:
+      Run: sudo killall mysqld
+   -- START MYSQL NORMALLY:
+      Run: sudo systemctl start MySQL
+   -- TEST NEW PASSWORD:
+      Run: mysql -u root -p and then Now type your NEW password.
+5) TEST MYSQL WORKBENCH:
+   then Test Connection
+6) Errors: 
+   -- IF mysql COMMAND NOT FOUND:
+      Run: sudo apt install mysql-client -y
+   -- IF mysqld_safe COMMAND NOT FOUND:
+      Run: sudo /usr/bin/mysqld_safe --skip-grant-tables &
+      Usually located at: /usr/bin/mysqld_safe
+

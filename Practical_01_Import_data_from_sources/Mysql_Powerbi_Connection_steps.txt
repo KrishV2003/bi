@@ -1,0 +1,19 @@
+1) Server name: localhost
+2) Database name: which ever you want
+3) How to Find It in MySQL Workbench
+   If you're using MySQL Workbench:
+   Open Workbench
+   Click your MySQL connection
+   Check the connection details / server status
+   You’ll see:
+   Hostname
+   Port
+   That hostname is what you put into Power BI’s Server field
+4) Username/Password: your MySQL credentials
+5) Install MySQL Connector/NET from https://dev.mysql.com/downloads/connector/net/
+6) Install the version that matches your Power BI/Desktop architecture:
+   64-bit Power BI → 64-bit connector
+   32-bit Power BI → 32-bit connector
+7) After Installing
+   Restart Power BI completely
+   Go to Get Data → MySQL Database
