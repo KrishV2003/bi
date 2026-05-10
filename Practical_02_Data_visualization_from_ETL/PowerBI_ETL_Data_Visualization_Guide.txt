@@ -1,0 +1,567 @@
+
+DATA VISUALIZATION THROUGH ETL IN POWER BI
+COMPLETE PRACTICAL GUIDE
+
+===========================================================
+1. INTRODUCTION TO ETL
+===========================================================
+
+ETL stands for:
+
+- Extract
+- Transform
+- Load
+
+ETL is a process used in Data Analytics, Business Intelligence,
+and Data Warehousing to collect data from different sources,
+clean and process the data, and finally load it into a system
+for analysis and visualization.
+
+Power BI performs ETL using:
+- Power Query Editor
+- Data Modeling
+- Visualization Engine
+
+===========================================================
+2. OBJECTIVE OF THE PRACTICAL
+===========================================================
+
+- Connect Power BI with external OData source
+- Extract Northwind database tables
+- Clean and transform data
+- Create relationships
+- Build visualizations and dashboards
+- Understand complete ETL workflow
+
+===========================================================
+3. DATA SOURCE USED
+===========================================================
+
+Northwind OData Feed URL:
+
+https://services.odata.org/V3/Northwind/Northwind.svc/
+
+===========================================================
+4. WHAT IS ODATA?
+===========================================================
+
+OData stands for Open Data Protocol.
+
+It is a web-based protocol used to access and manipulate data
+using standard HTTP requests.
+
+Power BI can directly connect to OData services.
+
+===========================================================
+5. UNDERSTANDING NORTHWIND DATABASE
+===========================================================
+
+Northwind is a sample business database provided by Microsoft.
+
+It contains:
+- Products
+- Customers
+- Orders
+- Categories
+- Suppliers
+- Employees
+
+Used for:
+- ETL learning
+- SQL learning
+- Power BI practice
+- Data visualization
+
+===========================================================
+6. COMPLETE ETL WORKFLOW
+===========================================================
+
+Data Source
+    ↓
+Data Extraction
+    ↓
+Data Transformation
+    ↓
+Data Cleaning
+    ↓
+Data Modeling
+    ↓
+Data Loading
+    ↓
+Data Visualization
+    ↓
+Dashboard Creation
+
+===========================================================
+7. STEP-BY-STEP PRACTICAL EXECUTION
+===========================================================
+
+STEP 1 — Open Power BI Desktop
+
+1. Launch Power BI Desktop
+2. Wait for Home Screen
+3. Ensure internet connection is active
+
+-----------------------------------------------------------
+
+STEP 2 — Start Data Extraction
+
+1. Go to Home Tab
+2. Click Get Data
+3. Search OData Feed
+4. Select OData Feed
+5. Click Connect
+
+-----------------------------------------------------------
+
+STEP 3 — Enter Data Source URL
+
+Paste:
+
+https://services.odata.org/V3/Northwind/Northwind.svc/
+
+Click OK
+
+-----------------------------------------------------------
+
+STEP 4 — Select Required Tables
+
+TABLE 1 — PRODUCTS
+
+Important Columns:
+- ProductID
+- ProductName
+- SupplierID
+- CategoryID
+- QuantityPerUnit
+- UnitPrice
+- UnitsInStock
+- UnitsOnOrder
+- ReorderLevel
+- Discontinued
+
+TABLE 2 — CATEGORIES
+
+Important Columns:
+- CategoryID
+- CategoryName
+- Description
+
+TABLE 3 — ORDERS
+
+Important Columns:
+- OrderID
+- CustomerID
+- EmployeeID
+- OrderDate
+- RequiredDate
+- ShippedDate
+- ShipVia
+- Freight
+- ShipCountry
+
+TABLE 4 — CUSTOMERS
+
+Important Columns:
+- CustomerID
+- CompanyName
+- ContactName
+- City
+- Country
+
+After selecting tables click:
+Transform Data
+
+===========================================================
+8. TRANSFORMATION PROCESS
+===========================================================
+
+STEP 5 — TRANSFORM PRODUCTS TABLE
+
+Keep Columns:
+- ProductID
+- ProductName
+- CategoryID
+- UnitPrice
+- UnitsInStock
+- Discontinued
+
+Remove:
+- SupplierID
+- QuantityPerUnit
+- UnitsOnOrder
+- ReorderLevel
+
+Reason:
+Removes unnecessary data and improves analysis.
+
+-----------------------------------------------------------
+
+Rename Columns:
+
+ProductName → Product Name
+UnitPrice → Unit Price
+UnitsInStock → Stock
+Discontinued → Is Discontinued
+
+-----------------------------------------------------------
+
+Change Data Types:
+
+ProductID → Whole Number
+CategoryID → Whole Number
+Unit Price → Decimal Number
+Stock → Whole Number
+Is Discontinued → True/False
+
+-----------------------------------------------------------
+
+Filter:
+
+Is Discontinued = False
+
+Reason:
+Analyze only active products.
+
+-----------------------------------------------------------
+
+Create Custom Column:
+
+Go to:
+Add Column → Custom Column
+
+Formula:
+
+if [Unit Price] > 50 then "High"
+else if [Unit Price] > 20 then "Medium"
+else "Low"
+
+Column Name:
+Price Category
+
+===========================================================
+9. TRANSFORM CATEGORIES TABLE
+===========================================================
+
+Keep:
+- CategoryID
+- CategoryName
+
+Remove:
+- Description
+
+Rename:
+CategoryName → Category
+
+===========================================================
+10. TRANSFORM ORDERS TABLE
+===========================================================
+
+Keep:
+- OrderID
+- CustomerID
+- OrderDate
+- Freight
+- ShipCountry
+
+Rename:
+OrderDate → Order Date
+ShipCountry → Country
+
+Change Data Types:
+- OrderID → Whole Number
+- Order Date → Date
+- Freight → Decimal Number
+
+Remove Null Values from:
+- Order Date
+- Freight
+
+===========================================================
+11. TRANSFORM CUSTOMERS TABLE
+===========================================================
+
+Keep:
+- CustomerID
+- CompanyName
+- Country
+- City
+
+Rename:
+CompanyName → Customer Name
+
+===========================================================
+12. LOAD DATA
+===========================================================
+
+Click:
+Close & Apply
+
+Power BI:
+- Applies transformations
+- Loads data into memory
+- Builds internal data model
+
+===========================================================
+13. DATA MODELING
+===========================================================
+
+Go to Model View
+
+Create Relationships:
+
+1. Products.CategoryID → Categories.CategoryID
+
+2. Orders.CustomerID → Customers.CustomerID
+
+===========================================================
+14. UNDERSTANDING POWER BI INTERFACE
+===========================================================
+
+1. Fields Pane
+Contains tables and columns.
+
+2. Visualizations Pane
+Contains chart icons.
+
+3. Report Canvas
+Area where visuals are created.
+
+===========================================================
+15. VISUALIZATIONS
+===========================================================
+
+VISUAL 1 — Product Price by Product Name
+
+Goal:
+Show price of each product.
+
+Steps:
+1. Select Clustered Bar Chart
+2. Drag Product Name → Y-Axis
+3. Drag Unit Price → Values
+4. Aggregation → Sum
+
+-----------------------------------------------------------
+
+VISUAL 2 — Products by Category
+
+Goal:
+Count products in each category.
+
+Steps:
+1. Select Pie Chart
+2. Drag Category → Legend
+3. Drag ProductID → Values
+4. Aggregation → Count
+
+-----------------------------------------------------------
+
+VISUAL 3 — Orders Over Time
+
+Goal:
+Show order trends over time.
+
+Steps:
+1. Select Line Chart
+2. Drag Order Date → X-Axis
+3. Drag OrderID → Values
+4. Aggregation → Count
+
+IMPORTANT:
+Use Order Date instead of Date Hierarchy.
+
+-----------------------------------------------------------
+
+VISUAL 4 — Freight by Country
+
+OPTION A — Clustered Column Chart
+
+1. Country → Axis
+2. Freight → Values
+3. Aggregation → Sum
+
+OPTION B — Map Visual
+
+1. Country → Location
+2. Freight → Bubble Size
+
+-----------------------------------------------------------
+
+VISUAL 5 — Total Products KPI
+
+1. Select Card Visual
+2. Drag ProductID
+3. Aggregation → Count
+
+-----------------------------------------------------------
+
+VISUAL 6 — Stock by Price Category
+
+1. Select Clustered Column Chart
+2. Price Category → Axis
+3. Stock → Values
+4. Aggregation → Sum
+
+-----------------------------------------------------------
+
+VISUAL 7 — Add Slicer
+
+1. Select Slicer Visual
+2. Drag Category → Field
+
+===========================================================
+16. DASHBOARD FORMATTING
+===========================================================
+
+STEP 11 — Add Dashboard Title
+
+Insert → Text Box
+
+Type:
+Northwind ETL Data Visualization Dashboard
+
+Recommended Formatting:
+- Font Size: 20–28
+- Bold ON
+- Center Align
+- Dark Blue or Black
+
+-----------------------------------------------------------
+
+STEP 12 — Apply Theme
+
+View → Themes
+
+Recommended:
+- Executive
+- Corporate
+- Professional
+
+-----------------------------------------------------------
+
+STEP 13 — Arrange Dashboard
+
+Suggested Layout:
+
+---------------------------------------------------
+|              Dashboard Title                    |
+---------------------------------------------------
+| Card KPI      | Pie Chart       | Slicer        |
+---------------------------------------------------
+| Bar Chart Product Price                         |
+---------------------------------------------------
+| Line Chart Orders Over Time                     |
+---------------------------------------------------
+| Freight by Country | Stock by Price Category    |
+---------------------------------------------------
+
+===========================================================
+17. OPTIONAL FORMATTING
+===========================================================
+
+Add Data Labels:
+Format Visual → Data Labels → ON
+
+Add Borders:
+Effects → Border → ON
+
+Add Shadow:
+Effects → Shadow → ON
+
+Rename Titles:
+- Product Price Analysis
+- Products by Category
+- Orders Trend Over Time
+- Freight Distribution by Country
+
+===========================================================
+18. INTERNAL WORKING OF POWER BI
+===========================================================
+
+During Extraction:
+- Connects to OData service
+- Retrieves structured data
+
+During Transformation:
+- Cleans data
+- Changes data types
+- Filters rows
+- Creates custom columns
+
+During Loading:
+- Compresses data
+- Stores in VertiPaq engine
+
+During Visualization:
+- Executes DAX calculations
+- Renders visuals dynamically
+
+===========================================================
+19. ADVANTAGES OF ETL IN POWER BI
+===========================================================
+
+- Better data quality
+- Faster reporting
+- Easy dashboard creation
+- Interactive analysis
+- Business intelligence support
+
+===========================================================
+20. REAL-WORLD APPLICATIONS
+===========================================================
+
+Used in:
+- Banking
+- Healthcare
+- Retail
+- E-commerce
+- Manufacturing
+- Finance
+- Marketing Analytics
+
+===========================================================
+21. VIVA / ORAL QUESTIONS
+===========================================================
+
+1. What is ETL?
+ETL stands for Extract, Transform, and Load.
+
+2. What is Power BI?
+Power BI is a Business Intelligence and Data Visualization tool.
+
+3. What is OData?
+OData is an open protocol for accessing web data.
+
+4. Why do we perform transformations?
+To clean and prepare data for analysis.
+
+5. What is Power Query?
+Power Query is the ETL engine inside Power BI.
+
+6. What is data modeling?
+Creating relationships between tables.
+
+7. What is a slicer?
+An interactive filter in Power BI.
+
+8. What is a KPI Card?
+Displays a single important metric.
+
+9. What is DAX?
+Formula language used in Power BI.
+
+===========================================================
+22. CONCLUSION
+===========================================================
+
+In this practical we successfully:
+- Extracted data from OData source
+- Transformed and cleaned data
+- Loaded data into Power BI
+- Created relationships
+- Built interactive visualizations
+- Designed a professional dashboard
+
+This practical demonstrates the complete ETL and dashboard
+development workflow in Power BI.
