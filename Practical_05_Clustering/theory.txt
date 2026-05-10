@@ -1,0 +1,949 @@
+# ASSIGNMENT 10 — DATA CLUSTERING ALGORITHM
+
+## Complete Deep Theory of Clustering in Very Simple Words
+
+Your lab manual Assignment 10 says:
+**“Perform the data clustering algorithm using any Clustering algorithm.”** 
+
+Before writing code, you must deeply understand:
+
+* What clustering is
+* Why clustering is used
+* Types of clustering
+* Different clustering algorithms
+* Distance measures
+* Mathematics behind clustering
+* Loss functions / objective functions
+* Evaluation metrics
+* Advantages and disadvantages
+* Real-world examples
+* Step-by-step working
+
+---
+
+# 1. WHAT IS CLUSTERING?
+
+## Simple Definition
+
+Clustering is an **unsupervised machine learning technique** used to group similar data points together.
+
+The goal is:
+
+* Similar data points → same cluster
+* Different data points → different clusters
+
+---
+
+# 2. WHAT IS UNSUPERVISED LEARNING?
+
+In unsupervised learning:
+
+* Data has **NO labels**
+* Machine tries to discover hidden patterns itself
+
+Example:
+
+| Student | Marks |
+| ------- | ----- |
+| A       | 90    |
+| B       | 92    |
+| C       | 30    |
+| D       | 35    |
+
+Machine automatically forms:
+
+* Cluster 1 → High scorers
+* Cluster 2 → Low scorers
+
+No teacher tells the machine.
+
+---
+
+# 3. REAL LIFE EXAMPLES OF CLUSTERING
+
+---
+
+## A. Customer Segmentation
+
+Amazon groups customers based on:
+
+* shopping behavior
+* spending habits
+* interests
+
+---
+
+## B. Netflix Recommendations
+
+Groups users with similar movie interests.
+
+---
+
+## C. Medical Diagnosis
+
+Groups patients with similar symptoms.
+
+---
+
+## D. Social Media
+
+Facebook groups users by interests.
+
+---
+
+## E. Image Segmentation
+
+Groups similar pixels in images.
+
+---
+
+# 4. GOAL OF CLUSTERING
+
+The main goal:
+
+## Maximize similarity INSIDE cluster
+
+AND
+
+## Minimize similarity BETWEEN clusters
+
+---
+
+# 5. VISUAL UNDERSTANDING
+
+Suppose we have points:
+
+```text
+● ● ●
+
+               ▲ ▲ ▲
+
+      ■ ■ ■
+```
+
+Clustering algorithm automatically says:
+
+* All circles → Cluster 1
+* All triangles → Cluster 2
+* All squares → Cluster 3
+
+---
+
+# 6. IMPORTANT TERMINOLOGIES
+
+---
+
+## A. Data Point
+
+Single observation.
+
+Example:
+Person age = 22, salary = 30000
+
+---
+
+## B. Feature
+
+Characteristics of data.
+
+Example:
+
+* age
+* salary
+* marks
+
+---
+
+## C. Cluster
+
+Group of similar data points.
+
+---
+
+## D. Centroid
+
+Center point of a cluster.
+
+Used heavily in K-Means.
+
+---
+
+# 7. TYPES OF CLUSTERING
+
+There are many clustering approaches.
+
+# Main Types
+
+| Type                     | Idea                               |
+| ------------------------ | ---------------------------------- |
+| Partition Clustering     | Divide data into K groups          |
+| Hierarchical Clustering  | Build cluster tree                 |
+| Density-Based Clustering | Dense regions form clusters        |
+| Distribution-Based       | Uses probability distributions     |
+| Fuzzy Clustering         | Point belongs to multiple clusters |
+
+---
+
+# 8. PARTITION-BASED CLUSTERING
+
+Most popular type.
+
+Example:
+
+## K-Means Clustering
+
+Data divided into K clusters.
+
+---
+
+# 9. K-MEANS CLUSTERING (MOST IMPORTANT)
+
+This is the most commonly used clustering algorithm.
+
+---
+
+# 10. BASIC IDEA OF K-MEANS
+
+Suppose:
+
+```text
+K = 3
+```
+
+Means:
+Create 3 clusters.
+
+Algorithm:
+
+1. Pick 3 centroids randomly
+2. Assign points to nearest centroid
+3. Update centroid
+4. Repeat until stable
+
+---
+
+# 11. STEP-BY-STEP K-MEANS
+
+Suppose data:
+
+| Point | X | Y |
+| ----- | - | - |
+| A     | 1 | 1 |
+| B     | 2 | 1 |
+| C     | 4 | 3 |
+| D     | 5 | 4 |
+
+Take:
+
+```text
+K = 2
+```
+
+---
+
+# STEP 1 — RANDOM CENTROIDS
+
+Suppose:
+
+```text
+C1 = (1,1)
+C2 = (5,4)
+```
+
+---
+
+# STEP 2 — CALCULATE DISTANCE
+
+Distance formula:
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}"}}
+
+This is Euclidean Distance.
+
+---
+
+## Example
+
+Distance between:
+
+```text
+A(1,1)
+C1(1,1)
+```
+
+d = \sqrt{(1-1)^2 + (1-1)^2} = 0
+
+Assign A to Cluster 1.
+
+---
+
+# STEP 3 — ASSIGN ALL POINTS
+
+Each point goes to nearest centroid.
+
+---
+
+# STEP 4 — UPDATE CENTROID
+
+New centroid formula:
+
+Centroid = \left(\frac{\sum x}{n}, \frac{\sum y}{n}\right)
+
+Example:
+
+If cluster has:
+
+```text
+(1,1), (2,1)
+```
+
+Then:
+
+Centroid = \left(\frac{1+2}{2}, \frac{1+1}{2}\right) = (1.5,1)
+
+---
+
+# STEP 5 — REPEAT
+
+Repeat until centroids stop changing.
+
+This is called:
+
+# CONVERGENCE
+
+---
+
+# 12. LOSS FUNCTION OF K-MEANS
+
+VERY IMPORTANT.
+
+K-Means tries to minimize:
+
+# Within Cluster Sum of Squares (WCSS)
+
+Also called:
+
+* Inertia
+* SSE (Sum of Squared Errors)
+
+Formula:
+
+J = \sum_{i=1}^{k} \sum_{x \in C_i} ||x - \mu_i||^2
+
+Where:
+
+| Symbol | Meaning            |     |   |   |                  |
+| ------ | ------------------ | --- | - | - | ---------------- |
+| J      | Loss function      |     |   |   |                  |
+| k      | Number of clusters |     |   |   |                  |
+| x      | Data point         |     |   |   |                  |
+| μ      | Centroid           |     |   |   |                  |
+|        |                    | x−μ |   | ² | Squared distance |
+
+---
+
+# SIMPLE MEANING OF LOSS FUNCTION
+
+Algorithm tries to:
+
+## Make points as close as possible to centroid.
+
+Smaller loss = better clustering.
+
+---
+
+# 13. WHY SQUARED DISTANCE?
+
+Because:
+
+* penalizes far points more
+* easier mathematically
+* smooth optimization
+
+---
+
+# 14. ELBOW METHOD
+
+Question:
+
+# How to choose K?
+
+Answer:
+Use Elbow Method.
+
+---
+
+## Process
+
+1. Run K-Means for different K values
+2. Compute WCSS
+3. Plot graph
+
+Graph shape:
+
+```text
+\
+ \
+  \
+   \__
+```
+
+The bend point = optimal K.
+
+---
+
+# 15. SILHOUETTE SCORE
+
+Measures clustering quality.
+
+Range:
+
+```text
+-1 to +1
+```
+
+| Value | Meaning          |
+| ----- | ---------------- |
+| +1    | Excellent        |
+| 0     | Overlapping      |
+| -1    | Wrong clustering |
+
+Formula:
+
+s = \frac{b-a}{\max(a,b)}
+
+Where:
+
+| Symbol | Meaning                        |
+| ------ | ------------------------------ |
+| a      | average intra-cluster distance |
+| b      | nearest-cluster distance       |
+
+---
+
+# 16. DISTANCE METRICS
+
+Clustering heavily depends on distance.
+
+---
+
+# A. EUCLIDEAN DISTANCE
+
+Most common.
+
+d = \sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
+
+Straight-line distance.
+
+---
+
+# B. MANHATTAN DISTANCE
+
+City-block distance.
+
+d = \sum_{i=1}^{n}|x_i-y_i|
+
+---
+
+# C. MINKOWSKI DISTANCE
+
+Generalized form.
+
+d = \left(\sum |x_i-y_i|^p\right)^{1/p}
+
+---
+
+# 17. HIERARCHICAL CLUSTERING
+
+Builds hierarchy/tree.
+
+Two types:
+
+| Type          | Meaning   |
+| ------------- | --------- |
+| Agglomerative | Bottom-up |
+| Divisive      | Top-down  |
+
+---
+
+# 18. AGGLOMERATIVE CLUSTERING
+
+Most popular hierarchical method.
+
+Process:
+
+1. Every point = separate cluster
+2. Merge closest clusters
+3. Repeat
+
+---
+
+# DENDROGRAM
+
+Tree-like structure showing merges.
+
+![Image](https://images.openai.com/static-rsc-4/JpJAfnD2YgnKVXxTW62dpuHELsypPmd9gcHQ55qrEegnlIECiXvb7toHCmBPiOt606evBEjWk2l_wQmPRFLPYh3_GqUhpyaRQluFxlnLP79uJmrcwBjqTLRacVvTr8ygAR1LjJn2oGtafp8FoJa8FcA-V6sWlhXDmyF59hhUcVJkMDHHWi2-PY8UfZwUKTjk?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/YA98TCmCI46ySFN2rmERkPuHQIWDRXjF2V-HsuXqfae2a3GynWeV6IyAf6I761eLSJhkWGTGAfOD5vV9nq2KUvRPq72ZrzWwjAeE1IB85bm7_A53x3QVuTlIfZGuJ-5GlOIcwvMsIjOVzNAI8sRuR5xUJQWk-FWqNHVePqLzR5WBwncQJclM1S6JWrus-1qW?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/JG1-xEOWhF0SSZCu_3lxqGCuR8EwsJapZ9Jd5by8zQ_tkSP7k7qI3Rq-PruXmnfR8B6fxgqGpXT5JAmmlAodrS4bxk9ggmkVQPGCUqSfIFCQuDaFn35GPKap5CgzY00xrgPtVedeNviv6DiASoYM6wIh8pkpeGmWFkIbPnpulbeZO8I4RnFMxCZrOzsZrRtd?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/mhqg9O4BkUvdioF84nHHY5TWpT51kcJBRDdo020XZM5UhOas3n8AF1Vtmz-s7H2bVcGw-xfkfy-XAQ_eEecBSoau7JoH2mMGVCuEfvq2JwGKgeezx2E-FDLiYlbMdmEg58VUI1riTmWBPyL5jKYu1Kmfwi97my0r0qAedQXmuvTS-iFJNYzE_MpWqGXehkoB?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/wLqnokCLVA6ggbl4VvCJOuKVV2oBh4hxlSVHbVTnkWfYrtqdye9XrU-UQFJNLk89B8inehgfywV3GIPqLZ70o0EUPe1OF_QA1vUQA32BxUfg_QkxekJUrwskEB3SoUEBimyYO11tvB-5-Cel6CbK7gXplINU39cI3KFIupEWbSnBQXvTqLIV_6brWyKWuIjb?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/cw245yBouNiMKukjS2P3hYjAOmwmvYReThXK786o3st890bbn1FzIUf17p1eBKGp1e-aIQzeNJlqrntP5qTYqTkPKdxyUyCqT4pGEtUz8KlnrR0jgCsqyqrd3xeLLJHzo4fJfv3u40fHy5ylZ443EZz2oZ_b_NzctXdil6Ulkq7rBRgM5hV24xHIyowxAd-u?purpose=fullsize)
+
+---
+
+# 19. LINKAGE METHODS
+
+How clusters are merged.
+
+---
+
+## A. Single Linkage
+
+Minimum distance.
+
+---
+
+## B. Complete Linkage
+
+Maximum distance.
+
+---
+
+## C. Average Linkage
+
+Average distance.
+
+---
+
+# 20. DBSCAN (DENSITY-BASED CLUSTERING)
+
+Very important advanced algorithm.
+
+Full form:
+
+# Density-Based Spatial Clustering of Applications with Noise
+
+---
+
+# MAIN IDEA
+
+Dense region = cluster.
+
+Sparse region = noise/outlier.
+
+---
+
+# ADVANTAGE
+
+Can detect:
+
+* arbitrary shapes
+* outliers
+
+Unlike K-Means.
+
+---
+
+# PARAMETERS
+
+---
+
+## EPS (ε)
+
+Neighborhood radius.
+
+---
+
+## MinPts
+
+Minimum points required.
+
+---
+
+# TYPES OF POINTS
+
+| Type         | Meaning         |
+| ------------ | --------------- |
+| Core Point   | Dense area      |
+| Border Point | Near dense area |
+| Noise Point  | Outlier         |
+
+---
+
+# DBSCAN VISUAL
+
+![Image](https://images.openai.com/static-rsc-4/b5XEImkHxGmtJ9Sote_f108XChBosz6n55hlYNegFDWL8fQm30XdvWgclVo7xpDhhMwyWWnkh6aIZxfGaPqq_W94efb4DYPG5aJgQyPhydLNrU9ZU5PiwHKG9vZp3jku3hupoHPE7LPsYS3X0VRX-Chjs8mNMldJ1D7XAw4gbPIlQzZF3zW_zgDCCYuCDYnY?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/Vl2L938IHqZolw_DGJ7Mu_EqyV2TRZFVgf7FX5D1InD38OgxOQqbP7zC3mj7IB3Dsw4N-8ivBZ_fCx5N6JVU09TS-cx-STFxzFZZpKpet-TdkYHbhElSFjQ5Uj11jfENbOvG9EuzXO5llhHcUNRtsvdHNtTO2dB9MC1ih4_yX5n661vrbv9ohhdkGKnziUT4?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/m6yHGjTQaLu_8cj6YMWQ201pc_JgT7yRcY8D0mzCz980_Ba2OO96e7uHjWU8Rfu5HAe7SocD9kSNQJnX2UB4P73ebypb8fXtgFWUo62FMYnW6b18QkgM8bYfufAf-m6IXX21QAddxxcmIgfmEG-86Q5OAWWMOjb4Y6483VoVrinak5h4PrFyFfcejYLt2L0f?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/ugA9BzDdK5ymeyzd21F5-VXM1t1NeznatNrd3TkFpv5N7rZ8A74euwr1BJhgJ0HvQjJYuKSABX-6XUJR6vOdp7vFDqLZPJWXV46xydcmv_r0PZZq_Sh-UNuyA7MGEML9aJ1VWczNIpKMEUMcJls0h-fS8Be7EAwB815ISKmJEQ47soNfM8q4oEeCHd4RPKBt?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/W40Q6QPz_Ijcacs-7ixtm-O29bPx70kPyyMyIpmTjEP8cfFlHqlds0qOkcF3jbho2jMdhm3AUZ2eAnsMtdK4nYLbsQHRuZJnd_YGmHESw6UvGPoFQomQa8iu_skYvm8GX5LRR9rvmo65wHeQwGFV2aqoBHev1myPabex-ZcI_3jYzfK_C6bog1X7I9ETAa1t?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/_uPNGD7WJnSd3g4IWvJAq28mhpnOn8zb4IIgMqqbWFtXBjncvBkGBzGeKfMzmen7FM-ZxcqFyIja6SvcBXEmiR5wLU6yb7RtU0eVPgVwQRLvUSDDxm5DRdHa-TSDruQjt0GjysdbiWi1M9w-eyADW4YXIy3P9j6xIG8uurcREjypKRN_2cXqniRNk7T5Totl?purpose=fullsize)
+
+---
+
+# 21. FUZZY C-MEANS CLUSTERING
+
+In K-Means:
+
+Point belongs to ONE cluster.
+
+In Fuzzy Clustering:
+
+Point can belong to multiple clusters.
+
+Example:
+
+```text
+70% Cluster A
+30% Cluster B
+```
+
+Useful in medical systems.
+
+---
+
+# 22. GAUSSIAN MIXTURE MODEL (GMM)
+
+Probabilistic clustering.
+
+Uses Gaussian distributions.
+
+Instead of hard assignment:
+
+```text
+Point definitely belongs to Cluster 1
+```
+
+It says:
+
+```text
+Point has 80% probability of Cluster 1
+```
+
+---
+
+# 23. EXPECTATION MAXIMIZATION (EM)
+
+GMM uses EM algorithm.
+
+Two steps:
+
+| Step         | Work                  |
+| ------------ | --------------------- |
+| Expectation  | Compute probabilities |
+| Maximization | Update distributions  |
+
+---
+
+# 24. CLUSTERING VS CLASSIFICATION
+
+| Clustering          | Classification   |
+| ------------------- | ---------------- |
+| Unsupervised        | Supervised       |
+| No labels           | Labels available |
+| Finds hidden groups | Predicts class   |
+
+---
+
+# 25. CHALLENGES IN CLUSTERING
+
+---
+
+## A. Choosing K
+
+Hard problem.
+
+---
+
+## B. Outliers
+
+Noise affects clusters.
+
+---
+
+## C. Different Shapes
+
+K-Means fails on non-spherical data.
+
+---
+
+## D. High Dimensions
+
+Distance becomes unreliable.
+
+Called:
+
+# Curse of Dimensionality
+
+---
+
+# 26. FEATURE SCALING
+
+VERY IMPORTANT.
+
+Suppose:
+
+| Age | Salary |
+| --- | ------ |
+| 20  | 50000  |
+
+Salary dominates distance.
+
+So scaling needed.
+
+---
+
+# STANDARDIZATION
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"z = \frac{x-\mu}{\sigma}"}}
+
+Where:
+
+| Symbol | Meaning            |
+| ------ | ------------------ |
+| x      | value              |
+| μ      | mean               |
+| σ      | standard deviation |
+
+---
+
+# 27. HOW K-MEANS CONVERGES
+
+K-Means minimizes WCSS iteratively.
+
+Each iteration:
+
+* assignment step
+* centroid update step
+
+This is optimization.
+
+---
+
+# 28. TIME COMPLEXITY
+
+For K-Means:
+
+O(n \times k \times i \times d)
+
+Where:
+
+| Symbol | Meaning    |
+| ------ | ---------- |
+| n      | points     |
+| k      | clusters   |
+| i      | iterations |
+| d      | dimensions |
+
+---
+
+# 29. ADVANTAGES OF K-MEANS
+
+| Advantage | Explanation         |
+| --------- | ------------------- |
+| Simple    | Easy to implement   |
+| Fast      | Efficient           |
+| Scalable  | Works on large data |
+
+---
+
+# 30. DISADVANTAGES OF K-MEANS
+
+| Problem                    | Explanation             |
+| -------------------------- | ----------------------- |
+| Need K                     | Must choose K           |
+| Sensitive to outliers      | Noise affects centroid  |
+| Assumes spherical clusters | Poor for complex shapes |
+
+---
+
+# 31. APPLICATIONS OF CLUSTERING
+
+---
+
+## Banking
+
+Customer segmentation.
+
+---
+
+## Healthcare
+
+Disease grouping.
+
+---
+
+## Marketing
+
+Targeted ads.
+
+---
+
+## Cybersecurity
+
+Anomaly detection.
+
+---
+
+## AI Systems
+
+Pattern discovery.
+
+---
+
+# 32. MATHEMATICAL INTUITION OF CLUSTERING
+
+Clustering fundamentally solves:
+
+# Optimization Problem
+
+Goal:
+
+\min J
+
+Where:
+
+```text
+J = clustering loss
+```
+
+Machine continuously updates clusters to reduce error.
+
+---
+
+# 33. WHY CLUSTERING IS IMPORTANT IN AI
+
+Because real-world data usually has:
+
+* hidden structure
+* unknown groups
+* unlabeled patterns
+
+Clustering helps AI discover those patterns automatically.
+
+---
+
+# 34. COMMON CLUSTERING ALGORITHMS SUMMARY
+
+| Algorithm     | Best For              | Weakness               |
+| ------------- | --------------------- | ---------------------- |
+| K-Means       | Simple spherical data | Sensitive to outliers  |
+| Hierarchical  | Tree structure        | Slow                   |
+| DBSCAN        | Arbitrary shapes      | Parameter tuning       |
+| GMM           | Probabilistic data    | Computationally costly |
+| Fuzzy C-Means | Soft clustering       | Complex                |
+
+---
+
+# 35. VERY IMPORTANT INTERVIEW/ORAL QUESTIONS
+
+---
+
+## Q1. What is clustering?
+
+Grouping similar data points together.
+
+---
+
+## Q2. Is clustering supervised?
+
+No, unsupervised.
+
+---
+
+## Q3. Difference between classification and clustering?
+
+Classification uses labels.
+Clustering discovers groups automatically.
+
+---
+
+## Q4. What is centroid?
+
+Center point of cluster.
+
+---
+
+## Q5. What is K in K-Means?
+
+Number of clusters.
+
+---
+
+## Q6. What is WCSS?
+
+Within Cluster Sum of Squares loss.
+
+---
+
+## Q7. Why scaling important?
+
+Distance metrics depend on feature scale.
+
+---
+
+# 36. COMPLETE FLOW OF CLUSTERING PROJECT
+
+```text
+Collect Data
+      ↓
+Clean Data
+      ↓
+Scale Features
+      ↓
+Choose Algorithm
+      ↓
+Train Clustering Model
+      ↓
+Evaluate Clusters
+      ↓
+Visualize Clusters
+      ↓
+Interpret Results
+```
+
+---
+
+# 37. FINAL INTUITION
+
+Clustering is like:
+
+```text
+Putting similar people into similar groups
+without knowing the groups beforehand.
+```
+
+Machine discovers patterns automatically.
+
+---
+
+# 38. CONCLUSION
+
+Clustering is one of the most important unsupervised learning techniques in Machine Learning. It helps in discovering hidden structures in unlabeled data. Different clustering algorithms use different mathematical ideas such as distance minimization, density estimation, probability distributions, and hierarchical merging to group similar data points together.
+
+The most important clustering algorithm is K-Means, which minimizes the WCSS loss function using centroid optimization. Other advanced algorithms like DBSCAN, Hierarchical Clustering, and Gaussian Mixture Models solve problems where K-Means fails.
+
+Clustering is widely used in AI, business analytics, healthcare, cybersecurity, recommendation systems, and image processing.
+
+Now after this theory, in the next step we can move to:
+
+1. Complete practical explanation
+2. Dataset understanding
+3. K-Means code line-by-line
+4. Mathematical walkthrough of code
+5. Visualization explanation
+6. Step-by-step execution flow
+7. Graph explanation
+8. Viva/oral questions
+9. Output interpretation
+10. Power BI / Python implementation
