@@ -1,0 +1,343 @@
+===========================================================
+                ASSIGNMENT 8
+===========================================================
+
+TITLE:
+Perform the Extraction Transformation and Loading (ETL)
+process to construct the database in SQL Server / Power BI.
+
+===========================================================
+AIM
+===========================================================
+
+To perform the ETL (Extraction, Transformation and Loading)
+process in Power BI using OData Feed / SQL Server data and
+construct a database/report for analysis.
+
+===========================================================
+OBJECTIVES
+===========================================================
+
+1. To understand the concept of ETL process.
+2. To understand Extraction, Transformation and Loading.
+3. To import data from external data sources.
+4. To clean and transform the data in Power BI.
+5. To load transformed data into Power BI model.
+6. To create a structured database/report for analysis.
+
+===========================================================
+SOFTWARE REQUIREMENTS
+===========================================================
+
+1. Microsoft Power BI Desktop
+2. SQL Server (Optional)
+3. Internet Connection
+4. Windows Operating System
+
+===========================================================
+HARDWARE REQUIREMENTS
+===========================================================
+
+1. Computer/Laptop
+2. Minimum 4GB RAM
+3. Intel i3 or higher processor
+
+===========================================================
+THEORY
+===========================================================
+
+ETL stands for:
+
+E -> Extraction
+T -> Transformation
+L -> Loading
+
+ETL is one of the most important processes used in
+Data Warehousing, Business Intelligence and Data Analytics.
+
+It helps in collecting data from different sources,
+cleaning and transforming the data, and loading it into
+a target system for reporting and analysis.
+
+-----------------------------------------------------------
+1. EXTRACTION
+-----------------------------------------------------------
+
+Extraction means collecting or importing data from
+different sources.
+
+The data may come from:
+- Excel files
+- SQL Server
+- Oracle Database
+- CSV files
+- APIs
+- OData Feed
+- Cloud Databases
+
+Purpose of Extraction:
+- Gather raw data
+- Combine data from multiple sources
+- Prepare data for analysis
+
+Types of Extraction:
+1. Full Extraction
+   - Entire data is extracted.
+   - Used for first-time loading.
+
+2. Incremental / Partial Extraction
+   - Only changed or updated data is extracted.
+   - Saves time and resources.
+
+-----------------------------------------------------------
+2. TRANSFORMATION
+-----------------------------------------------------------
+
+Transformation means modifying, cleaning and converting
+the extracted data into useful format.
+
+Transformation operations include:
+- Removing null values
+- Changing data types
+- Renaming columns
+- Filtering rows
+- Merging tables
+- Splitting columns
+- Sorting data
+- Removing duplicates
+- Creating calculated columns
+
+Purpose of Transformation:
+- Improve data quality
+- Make data consistent
+- Prepare data for analysis and visualization
+
+-----------------------------------------------------------
+3. LOADING
+-----------------------------------------------------------
+
+Loading means storing transformed data into the target
+system like:
+- Data Warehouse
+- SQL Server
+- Power BI Model
+
+Purpose:
+- Final data becomes available for reporting,
+  dashboards and analytics.
+
+===========================================================
+DATA SOURCE USED
+===========================================================
+
+OData Feed URL:
+
+https://services.odata.org/Northwind/Northwind.svc
+
+Tables Used:
+1. Orders
+2. Products
+
+===========================================================
+PROCEDURE / STEPS
+===========================================================
+
+-----------------------------------------------------------
+STEP 1: OPEN POWER BI DESKTOP
+-----------------------------------------------------------
+
+1. Open Microsoft Power BI Desktop.
+2. Wait until the Home screen appears.
+
+-----------------------------------------------------------
+STEP 2: IMPORT DATA USING ODATA FEED
+-----------------------------------------------------------
+
+1. Click on Home Tab.
+2. Select "Get Data".
+3. Choose "OData Feed".
+4. Paste the following URL:
+
+   https://services.odata.org/Northwind/Northwind.svc
+
+5. Click OK.
+6. Navigator window will open.
+7. Select:
+   - Orders table
+   - Products table
+8. Click "Transform Data".
+
+-----------------------------------------------------------
+STEP 3: DATA EXTRACTION
+-----------------------------------------------------------
+
+Power BI extracts data from the OData service.
+
+Extracted tables:
+- Orders
+- Products
+
+The extracted data appears inside Power Query Editor.
+
+-----------------------------------------------------------
+STEP 4: DATA TRANSFORMATION
+-----------------------------------------------------------
+
+=============================
+A. TRANSFORM PRODUCTS TABLE
+=============================
+
+1. Open Products table.
+
+2. Remove unnecessary columns.
+
+Keep only:
+- ProductID
+- ProductName
+- QuantityPerUnit
+- UnitsInStock
+
+3. Rename columns if required.
+
+4. Change data type of UnitsInStock:
+   - Select UnitsInStock column
+   - Change datatype to Whole Number
+
+Purpose:
+- To ensure numerical calculations work properly.
+
+=============================
+B. TRANSFORM ORDERS TABLE
+=============================
+
+1. Open Orders table.
+
+2. Expand Order_Details column.
+
+3. Select all columns from Order_Details.
+
+Expanded columns include:
+- UnitPrice
+- Quantity
+- Discount
+
+Purpose:
+- To access detailed order information.
+
+-----------------------------------------------------------
+STEP 5: CREATE CUSTOM COLUMN
+-----------------------------------------------------------
+
+1. Go to Add Column tab.
+2. Click on Custom Column.
+
+3. Create new column:
+   Column Name:
+   LineTotal
+
+4. Formula:
+
+   [Order_Details.UnitPrice] *
+   [Order_Details.Quantity]
+
+5. Click OK.
+
+Purpose:
+- To calculate total amount of each order line.
+
+-----------------------------------------------------------
+STEP 6: RENAME AND REORDER COLUMNS
+-----------------------------------------------------------
+
+1. Rename columns properly.
+2. Move LineTotal column after ShipCountry.
+
+Purpose:
+- Better readability and organization.
+
+-----------------------------------------------------------
+STEP 7: COMBINE TABLES
+-----------------------------------------------------------
+
+1. Merge Orders and Products tables.
+2. Use ProductID as matching key.
+3. Join related information.
+
+Purpose:
+- Combine product details with sales data.
+
+-----------------------------------------------------------
+STEP 8: LOAD DATA
+-----------------------------------------------------------
+
+1. Click "Close & Apply".
+2. Power BI loads transformed data into model.
+
+This completes the Loading phase of ETL.
+
+===========================================================
+OUTPUT
+===========================================================
+
+1. Extracted data successfully imported from OData Feed.
+2. Data transformed using Power Query Editor.
+3. Custom calculations performed.
+4. Final structured database/report created in Power BI.
+
+===========================================================
+RESULT
+===========================================================
+
+Successfully performed ETL process in Power BI using
+Northwind OData Feed and constructed the database/report.
+
+===========================================================
+ADVANTAGES OF ETL
+===========================================================
+
+1. Improves data quality
+2. Removes inconsistencies
+3. Supports business intelligence
+4. Helps in decision making
+5. Enables data integration
+6. Creates centralized data repository
+
+===========================================================
+APPLICATIONS OF ETL
+===========================================================
+
+1. Data Warehousing
+2. Business Intelligence
+3. Banking Systems
+4. Healthcare Analytics
+5. E-commerce Reporting
+6. Sales Analysis
+7. Financial Reporting
+
+===========================================================
+CONCLUSION
+===========================================================
+
+Thus, we successfully performed the Extraction,
+Transformation and Loading (ETL) process in Power BI
+using OData Feed and constructed a database/report
+for analysis.
+
+===========================================================
+ORAL QUESTIONS
+===========================================================
+
+1. What is ETL?
+2. Explain Extraction phase.
+3. What is Transformation in ETL?
+4. Why is data cleaning important?
+5. What is Loading process?
+6. What is OData Feed?
+7. What is Power Query Editor?
+8. Why do we change data types?
+9. What is a custom column in Power BI?
+10. Difference between Full Load and Incremental Load?
+11. What is data warehouse?
+12. Why is ETL important in Business Intelligence?
+
+===========================================================
