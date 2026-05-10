@@ -1,0 +1,286 @@
+ADVANCED EXCEL PRACTICAL – COMPLETE GUIDE
+Sales Data Analysis and Visualization
+==============================================
+
+----------------------------------------------
+STEP 1: ENTER DATA
+----------------------------------------------
+1. Open Excel → Click "Blank Workbook"
+2. Click on cell A1 and type headers exactly:
+   A1 = Month
+   B1 = TVs
+   C1 = Mobile Phones
+   D1 = Laptops
+   E1 = Total
+   F1 = Monthly Change
+
+3. Enter data from Row 2 to Row 13:
+
+   A2  = 01-01-2022  B2  = 145  C2  = 335  D2  = 82
+   A3  = 02-01-2022  B3  = 145  C3  = 362  D3  = 126
+   A4  = 03-01-2022  B4  = 105  C4  = 311  D4  = 95
+   A5  = 04-01-2022  B5  = 171  C5  = 259  D5  = 93
+   A6  = 05-01-2022  B6  = 178  C6  = 277  D6  = 107
+   A7  = 06-01-2022  B7  = 167  C7  = 292  D7  = 145
+   A8  = 07-01-2022  B8  = 200  C8  = 385  D8  = 77
+   A9  = 08-01-2022  B9  = 181  C9  = 388  D9  = 78
+   A10 = 09-01-2022  B10 = 152  C10 = 291  D10 = 83
+   A11 = 10-01-2022  B11 = 143  C11 = 345  D11 = 102
+   A12 = 11-01-2022  B12 = 114  C12 = 399  D12 = 99
+   A13 = 12-01-2022  B13 = 109  C13 = 250  D13 = 101
+
+4. Add Totals in Row 15:
+   A15 = Total
+   B15 = 1810   C15 = 3894   D15 = 1188
+
+5. Bold headers:
+   → Select A1 to F1
+   → Top toolbar → Click "B" (Bold button) OR press Ctrl+B
+
+6. Adjust column width:
+   → Right-click on any column letter → Select "Column Width"
+   → Or double-click the column border to auto-fit
+
+----------------------------------------------
+STEP 2: FORMULA – TOTAL SALES (Column E)
+----------------------------------------------
+WHERE: Column E (5th column)
+
+1. Click cell E2
+2. Type: =SUM(B2:D2)
+3. Press Enter
+4. Click E2 again
+5. See small green square at bottom-right corner of E2
+   → Click and drag it DOWN to E13
+   (This copies formula for all 12 months)
+
+Result: E2=562, E3=633, E4=511 ... E13=460
+
+----------------------------------------------
+STEP 3: FORMULA – MONTHLY CHANGE (Column F)
+----------------------------------------------
+WHERE: Column F (6th column)
+
+1. Click cell F2
+   → Type: =E2   → Press Enter
+   (First month has no previous month, so Total = Change)
+
+2. Click cell F3
+   → Type: =E3-E2   → Press Enter
+
+3. Click F3 again → Drag the green square DOWN to F13
+
+Result: F2=562, F3=71, F4=-122, F5=12 ...
+
+----------------------------------------------
+STEP 4: FORMAT AS TABLE
+----------------------------------------------
+WHERE: Home tab → Styles group
+
+1. Click cell A1
+2. Press Ctrl+Shift+End to select all data (A1 to F13)
+3. Go to: TOP MENU → "Home" tab
+4. Look for "Styles" section in ribbon
+5. Click "Format as Table"
+6. Choose any color style
+7. A popup appears → Check "My table has headers" → Click OK
+
+----------------------------------------------
+STEP 5: CHART 1 – CLUSTERED COLUMN CHART
+----------------------------------------------
+Title: "Monthly Electronics Product Sales"
+
+WHAT TO SELECT:
+→ Click A1, hold Ctrl, then also select B1:D13
+   (i.e., Column A rows 1-13 + Column B, C, D rows 1-13)
+   Exact range: A1:A13 and B1:D13
+
+HOW TO INSERT:
+1. Go to TOP MENU → "Insert" tab
+2. Look for "Charts" section in ribbon
+3. Click "Insert Column or Bar Chart" icon
+   (looks like vertical bars)
+4. Select: "Clustered Column" (first option, top-left)
+5. Chart appears on sheet
+
+FORMATTING THE CHART:
+- Click on chart title → Delete existing text → Type:
+  "Monthly Electronics Product Sales"
+- Right-click chart → "Select Data" to verify data
+- To label axes: Click chart → go to "Chart Design" tab
+  (appears at top when chart is selected)
+  → "Add Chart Element" → "Axis Titles"
+  → Set X-axis = "Months", Y-axis = "Units Sold"
+
+----------------------------------------------
+STEP 6: CHART 2 – HORIZONTAL BAR CHART
+----------------------------------------------
+Title: "Comparison of Product Sales by Month"
+
+WHAT TO SELECT:
+→ Select A1:A13 (Month column)
+→ Hold Ctrl → Also select B1:D13 (TVs, Mobiles, Laptops)
+   Exact range: A1:D13
+
+HOW TO INSERT:
+1. TOP MENU → "Insert" tab → "Charts" section
+2. Click "Insert Column or Bar Chart" icon
+3. Select: "Clustered Bar" (horizontal bars – second section)
+4. Chart appears on sheet
+5. Click chart title → Type: "Comparison of Product Sales by Month"
+
+----------------------------------------------
+STEP 7: CHART 3 – LINE CHART
+----------------------------------------------
+Title: "Sales Trend Analysis of Electronic Products"
+
+WHAT TO SELECT:
+→ Select A1:A13 (Month column)
+→ Hold Ctrl → Also select B1:D13 (TVs, Mobiles, Laptops)
+   Exact range: A1:D13
+
+HOW TO INSERT:
+1. TOP MENU → "Insert" tab → "Charts" section
+2. Click "Insert Line or Area Chart" icon
+   (looks like a line going up/down)
+3. Select: "Line" (first option – 2D Line)
+4. Chart appears → Click title → Type:
+   "Sales Trend Analysis of Electronic Products"
+
+----------------------------------------------
+STEP 8: CHART 4 – PIE CHART
+----------------------------------------------
+Title: "Total Sales Distribution of Electronic Products"
+
+WHAT TO SELECT:
+→ First use the totals from Row 15:
+   Select B1:D1 (headers: TVs, Mobile Phones, Laptops)
+   Hold Ctrl → Also select B15:D15 (totals: 1810, 3894, 1188)
+   Exact range: B1:D1 and B15:D15
+
+HOW TO INSERT:
+1. TOP MENU → "Insert" tab → "Charts" section
+2. Click "Insert Pie or Doughnut Chart" icon
+   (looks like a pie slice)
+3. Select: "Pie" (first 2D Pie option)
+4. Chart appears → Click title → Type:
+   "Total Sales Distribution of Electronic Products"
+
+ADD PERCENTAGES:
+- Click on the pie chart
+- Click "+" button on right side of chart (Chart Elements)
+- Check "Data Labels"
+- Right-click any data label → "Format Data Labels"
+- Check "Percentage" → Uncheck "Value" → Click Close
+
+----------------------------------------------
+STEP 9: CHART 5 – SCATTER PLOT
+----------------------------------------------
+Title: "Relationship Between TV and Mobile Phone Sales"
+
+WHAT TO SELECT:
+→ Select B1:B13 (TVs column – will be X axis)
+→ Hold Ctrl → Also select C1:C13 (Mobile Phones – Y axis)
+   Exact range: B1:C13
+
+HOW TO INSERT:
+1. TOP MENU → "Insert" tab → "Charts" section
+2. Click "Insert Scatter (X,Y) or Bubble Chart" icon
+   (looks like dots scattered)
+3. Select: "Scatter" (first option – dots only, no lines)
+4. Chart appears → Click title → Type:
+   "Relationship Between TV and Mobile Phone Sales"
+5. Label axes:
+   X-axis = "TV Sales"
+   Y-axis = "Mobile Phone Sales"
+
+----------------------------------------------
+STEP 10: CHART 6 – WATERFALL CHART
+----------------------------------------------
+Title: "Monthly Sales Increase and Decrease Analysis"
+
+WHAT TO SELECT:
+→ Select A1:A13 (Month column)
+→ Hold Ctrl → Also select F1:F13 (Monthly Change column)
+   Exact range: A1:A13 and F1:F13
+
+HOW TO INSERT:
+1. TOP MENU → "Insert" tab → "Charts" section
+2. Click "Insert Waterfall, Funnel, Stock, Surface or Radar Chart"
+   (looks like floating bars)
+3. Select: "Waterfall"
+4. Chart appears → Click title → Type:
+   "Monthly Sales Increase and Decrease Analysis"
+
+NOTE:
+- Blue/Orange bars going UP = Sales increased
+- Bars going DOWN = Sales decreased
+- First bar (Jan = 562) is the base/starting point
+
+----------------------------------------------
+STEP 11: CONDITIONAL FORMATTING
+----------------------------------------------
+WHERE: Home tab → Styles group
+
+1. Select E2:E13 (Total Sales values only)
+2. TOP MENU → "Home" tab
+3. Look for "Styles" section → Click "Conditional Formatting"
+4. Hover over "Color Scales"
+5. Select "Green-Yellow-Red" (or any gradient)
+   → High values = Green, Low values = Red
+
+OPTIONAL – Data Bars:
+- Same steps → Choose "Data Bars" instead of Color Scales
+- Shows a mini bar inside each cell
+
+----------------------------------------------
+STEP 12: SORT & FILTER
+----------------------------------------------
+WHERE: Data tab OR use table dropdown arrows
+
+FILTER:
+- Since you formatted as Table, dropdown arrows appear on headers
+- Click dropdown arrow on "Total" column (E1)
+- Choose "Sort Largest to Smallest"
+
+MANUAL SORT:
+1. Click any cell in the Total column
+2. TOP MENU → "Data" tab
+3. Click "ZA↓" button (Sort Largest to Smallest)
+
+----------------------------------------------
+STEP 13: ARRANGE DASHBOARD (Final Layout)
+----------------------------------------------
+1. Click on each chart → Drag it to arrange neatly
+2. Resize charts: Click chart → Drag corner handles
+3. Suggested layout (2 columns):
+   Row 1: Clustered Column Chart | Line Chart
+   Row 2: Bar Chart              | Scatter Plot
+   Row 3: Pie Chart              | Waterfall Chart
+
+4. To match dark theme (as in your file):
+   Click chart → "Chart Design" tab (top menu)
+   → "Change Colors" or choose a dark Chart Style from the gallery
+
+----------------------------------------------
+STEP 14: SAVE
+----------------------------------------------
+Press Ctrl + S
+→ Choose location → Save as .xlsx format
+
+==============================================
+QUICK REFERENCE – CHART SELECTION SUMMARY
+==============================================
+
+Chart Name              | Select These Cells      | Insert Menu Option
+------------------------|-------------------------|-----------------------------
+Clustered Column        | A1:A13 + B1:D13         | Insert → Column/Bar → Clustered Column
+Horizontal Bar          | A1:D13                  | Insert → Column/Bar → Clustered Bar
+Line Chart              | A1:D13                  | Insert → Line → 2D Line
+Pie Chart               | B1:D1 + B15:D15         | Insert → Pie → 2D Pie
+Scatter Plot            | B1:C13                  | Insert → Scatter → Scatter (dots)
+Waterfall Chart         | A1:A13 + F1:F13         | Insert → Waterfall/Funnel → Waterfall
+
+==============================================
+END OF PRACTICAL
+==============================================
